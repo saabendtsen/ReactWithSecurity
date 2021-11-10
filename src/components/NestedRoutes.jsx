@@ -15,7 +15,7 @@ import GetCatFacts from "./GetCatFacts";
 import GetIp from "./GetIp";
 import GetBTCPrice from "./GetBTCPrice";
 
-export default function Nesting(props) {
+const Nesting = (props) => {
   let userrole = props.userrole;
   return (
     <Router>
@@ -51,6 +51,8 @@ export default function Nesting(props) {
     </Router>
   );
 }
+
+export default Nesting;
 
 const Header = (props) => {
   let userrole = props.userrole;
