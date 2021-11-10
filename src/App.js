@@ -44,16 +44,17 @@ function LoggedIn() {
 
   return (   
       <div>
+      <Router>
         <Header />
         <Switch>
           <Route exact path="/">
             <Home />
           </Route>
           <Route path="/products">
-            <Products />
+            <Products/>
           </Route>
-          <Route path="/catfact">
-            <CatFacts />
+          <Route path="/catfacts">
+            <CatFacts facade={facade} />
           </Route>
           <Route path="/add-Book">
             <AddBook />
@@ -62,6 +63,7 @@ function LoggedIn() {
             <NoMatch />
           </Route>
         </Switch>
+      </Router>
       
       <h2>Data Received from server</h2>
       <h3>{dataFromServer}</h3>
