@@ -11,12 +11,6 @@ function handleHttpErrors(res) {
   return res.json();
 }
 
-const getCatFacts = () => {
-  const option = makeOptions("GET",true)
-  const res = fetch(CatFactURL,option).then(handleHttpErrors).then(response => response.json).then(data =>{
-    const catfacts = {fact: data.fact, length: data.length}
-  return catfacts;
-      })}
 
 function apiFacade() {
   /* Insert utility-methods from a latter step (d) here (REMEMBER to uncomment in the returned object when you do)*/
@@ -50,6 +44,15 @@ function apiFacade() {
         setToken(res.token);
       });
   };
+
+  const getCatFacts = () => {
+    const options = makeOptions("GET",true);
+    const res = fetch(CatFactURL,options).then(handleHttpErrors).then(response => response.json).then(data =>{
+      const catfacts = {fact: data.fact, length: data.length}
+    return catfacts;
+        })
+  };
+
   const fetchData = async () => {
     const options = makeOptions("GET", true); //True add's the token
     const res = await fetch(URL + "/api/info/" + decoded.roles, options);
@@ -72,7 +75,7 @@ function apiFacade() {
     }
     return opts;
   };
-  
+
   return {
     makeOptions,
     setToken,

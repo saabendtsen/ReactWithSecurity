@@ -7,5 +7,4 @@ const CatFacts = (props) => {
     return (<div>{catFact.fact} {catFact.length}</div>)
   };
 
-
 export default CatFacts;
