@@ -27,8 +27,8 @@ import {
           </NavLink>
         </li>
         <li>
-          <NavLink activeClassName="active" to="/company">
-            Company
+          <NavLink activeClassName="active" to="/catfacts">
+            Catfacs
           </NavLink>
         </li>
       </ul>
