@@ -1,23 +1,28 @@
 import React, { useState } from "react";
+import facade from "../apiFacade";
+import { Server_URL } from "./Urls";
 
+const AdminManager = () => {
+  const [newUser, setNewUser] = useState();
 
- const AdminManager = () =>{
-   const [newUser,setNewUser] = useState();
+  const handleChange = (evt) => {
+    setNewUser({ ...newUser, [evt.target.id]: evt.target.value });
+  };
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    const options = facade.makeOptions("POST", true, newUser);
+    fetch(Server_URL + "/admin/createUser", options).then((res) =>
+      facade.handleHttpErrors(res)
+    );
+  };
 
-
-   const handleChange = (evt) => {
-    setNewUser({...newUser,[evt.target.id]:evt.target.value})
-}
-const handleSubmit = (evt) => {
-  evt.preventDefault();
-//   props.addEditPerson(person,(emptyPerson =>{setPerson(emptyPerson)}));
-};
-
-   
-
-    return(
-        <div>
-      <form className="form-horizontal" onSubmit={handleSubmit} onChange={handleChange}>
+  return (
+    <div>
+      <form
+        className="form-horizontal"
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+      >
         <div className="form-group">
           <label className="control-label col-sm-3" htmlFor="username">
             Name:
@@ -43,7 +48,7 @@ const handleSubmit = (evt) => {
             />
           </div>
         </div>
-    
+
         <div className="form-group">
           <div className="col-sm-offset-3 col-sm-9">
             <button type="submit" className="btn btn-primary">
@@ -63,8 +68,7 @@ const handleSubmit = (evt) => {
       <p>And update the backend when submitted</p>
       <p>{JSON.stringify(newUser)}</p>
     </div>
-    );
+  );
 };
-
 
 export default AdminManager;

@@ -12,7 +12,8 @@ import {
 import HomeNested from "./HomeNested";
 import AdminManger from "./AdminManager";
 import GetCatFacts from "./GetCatFacts";
-// import Products from "./Products";
+import GetIp from "./GetIp";
+import GetBTCPrice from "./GetBTCPrice";
 
 export default function Nesting(props) {
   let userrole = props.userrole;
@@ -31,7 +32,12 @@ export default function Nesting(props) {
             <Route path="/catfacts">
               <GetCatFacts />
             </Route>
-            <Route path="/products">{/* <Products /> */}</Route>
+            <Route path="/ip">
+              <GetIp />
+            </Route>
+            <Route path="/btcprice">
+              <GetBTCPrice />
+            </Route>
             {userrole === "admin" && (
               <Route path="/admin">
                 <AdminManger />
@@ -64,8 +70,13 @@ const Header = (props) => {
         </NavLink>
       </li>
       <li>
-        <NavLink activeClassName="selected" to="/products">
-          Products
+        <NavLink activeClassName="selected" to="/ip">
+          Your IP
+        </NavLink>
+      </li>
+      <li>
+        <NavLink activeClassName="selected" to="/btcprice">
+          BTC Price
         </NavLink>
       </li>
 
