@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import jwt_decode from "jwt-decode";
 import facade from "./apiFacade";
 import Nesting from "./components/NestedRoutes";
 
@@ -22,7 +23,7 @@ function LogIn({ login }) {
       <h2>Login</h2>
       <form onChange={onChange}>
         <input placeholder="User Name" id="username" />
-        <input placeholder="Password" id="password" />
+        <input type="password" placeholder="Password" id="password" />
         <button onClick={performLogin}>Login</button>
       </form>
     </div>
@@ -35,10 +36,12 @@ function LoggedIn() {
     facade.fetchData().then((data) => setDataFromServer(data.msg));
   }, []);
 
+  let token = jwt_decode(facade.getToken());
+
   return (
     <div>
       <h4>{dataFromServer}</h4>
-      <Nesting />
+      <Nesting userrole={token.roles} />
     </div>
   );
 }
