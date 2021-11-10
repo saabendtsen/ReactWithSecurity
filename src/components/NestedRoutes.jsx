@@ -11,13 +11,15 @@ import {
 } from "react-router-dom";
 import CatFacts from "./CatFacts";
 import HomeNested from "./HomeNested";
+import AdminManger from "./AdminManager";
 // import Products from "./Products";
 
-export default function Nesting() {
+export default function Nesting(props) {
+  let userrole = props.userrole;
   return (
     <Router>
       <div>
-        <Header />
+        <Header userrole={userrole} />
         <div className="content">
           <Switch>
             <Route exact path="/">
@@ -30,6 +32,11 @@ export default function Nesting() {
               <CatFacts />
             </Route>
             <Route path="/products">{/* <Products /> */}</Route>
+            {userrole === "admin" && (
+              <Route path="/admin">
+                <AdminManger />
+              </Route>
+            )}
           </Switch>
         </div>
       </div>
@@ -37,7 +44,8 @@ export default function Nesting() {
   );
 }
 
-const Header = () => {
+const Header = (props) => {
+  let userrole = props.userrole;
   return (
     <ul className="header">
       <li>
@@ -60,6 +68,14 @@ const Header = () => {
           Products
         </NavLink>
       </li>
+
+      {userrole === "admin" && (
+        <li>
+          <NavLink activeClassName="selected" to="/admin">
+            Admin
+          </NavLink>
+        </li>
+      )}
     </ul>
   );
 };
