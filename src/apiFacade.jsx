@@ -2,6 +2,7 @@
 import jwt_decode from "jwt-decode";
 
 const URL = "http://localhost:8080/CA2_Group_war_exploded";
+const CatFactURL = "https://catfact.ninja/fact";
 
 function handleHttpErrors(res) {
   if (!res.ok) {
@@ -9,6 +10,7 @@ function handleHttpErrors(res) {
   }
   return res.json();
 }
+
 
 function apiFacade() {
   /* Insert utility-methods from a latter step (d) here (REMEMBER to uncomment in the returned object when you do)*/
@@ -42,6 +44,15 @@ function apiFacade() {
         setToken(res.token);
       });
   };
+
+  const getCatFacts = () => {
+    const options = makeOptions("GET",true);
+    const res = fetch(CatFactURL,options).then(handleHttpErrors).then(response => response.json).then(data =>{
+      const catfacts = {fact: data.fact, length: data.length}
+    return catfacts;
+        })
+  };
+
   const fetchData = async () => {
     const options = makeOptions("GET", true); //True add's the token
     const res = await fetch(URL + "/api/info/" + decoded.roles, options);
@@ -64,6 +75,7 @@ function apiFacade() {
     }
     return opts;
   };
+
   return {
     makeOptions,
     setToken,
@@ -72,6 +84,7 @@ function apiFacade() {
     login,
     logout,
     fetchData,
+    getCatFacts
   };
 }
 const facade = apiFacade();
