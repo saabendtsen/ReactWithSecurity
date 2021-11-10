@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import CatFacts from "./CatFacts";
 import HomeNested from "./HomeNested";
+import facade from "../apiFacade";
 // import Products from "./Products";
 
 export default function Nesting() {
@@ -27,7 +28,7 @@ export default function Nesting() {
               <Topics />
             </Route>
             <Route path="/catfacts">
-              <CatFacts />
+              <CatFacts facade={facade}/>
             </Route>
             <Route path="/products">{/* <Products /> */}</Route>
           </Switch>

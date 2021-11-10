@@ -2,7 +2,7 @@
 import jwt_decode from "jwt-decode";
 
 const URL = "http://localhost:8080/CA2_Group_war_exploded";
-const CatFactURL = "https://catfact.ninja/fact";
+const CatFactURL = "/api/info/catfact";
 
 function handleHttpErrors(res) {
   if (!res.ok) {
@@ -47,10 +47,7 @@ function apiFacade() {
 
   const getCatFacts = () => {
     const options = makeOptions("GET",true);
-    const res = fetch(CatFactURL,options).then(handleHttpErrors).then(response => response.json).then(data =>{
-      const catfacts = {fact: data.fact, length: data.length}
-    return catfacts;
-        })
+    return fetch(CatFactURL,options).then(res => handleHttpErrors(res))
   };
 
   const fetchData = async () => {
