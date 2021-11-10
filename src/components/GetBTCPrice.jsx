@@ -1,28 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { bitCoinPrice_URL } from "./Urls";
-class GetBTCPrice extends React.Component {
-  // Constructor
-  constructor(props) {
-    super(props);
+const GetBTCPrice = () => {
+  const [items, setItems] = useState();
+  const [DataisLoaded, setDataisLoaded] = useState(false)
 
-    this.state = {
-      items: [],
-      DataisLoaded: false,
-    };
-  }
 
-  // ComponentDidMount is used to
-  componentDidMount() {
+  useEffect(() =>{
     fetch(bitCoinPrice_URL)
-      .then((res) => res.json())
+    .then((res) => res.json())
+    .then((json) => {
+      setItems(json);
+      setDataisLoaded(true)
+    })},[]);
 
-      .then((json) => {
-        this.setState({ items: json, DataisLoaded: true });
-      });
-  }
 
-  render() {
-    const { DataisLoaded, items } = this.state;
     if (!DataisLoaded)
       return (
         <div>
@@ -30,8 +21,10 @@ class GetBTCPrice extends React.Component {
         </div>
       );
 
-    return <div>{JSON.stringify(items)}</div>;
+    return <div>{JSON.stringify(items)}
+        <p><h4> Current price on BTC in USD: {items.bpi.USD.rate}</h4></p>
+    </div>;
   }
-}
+
 
 export default GetBTCPrice;
