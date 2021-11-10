@@ -9,10 +9,9 @@ import {
   useParams,
   useRouteMatch,
 } from "react-router-dom";
-import CatFacts from "./CatFacts";
 import HomeNested from "./HomeNested";
-import facade from "../apiFacade";
 import AdminManger from "./AdminManager";
+import GetCatFacts from "./GetCatFacts";
 // import Products from "./Products";
 
 export default function Nesting(props) {
@@ -30,7 +29,7 @@ export default function Nesting(props) {
               <Topics />
             </Route>
             <Route path="/catfacts">
-              <CatFacts facade={facade}/>
+              <GetCatFacts />
             </Route>
             <Route path="/products">{/* <Products /> */}</Route>
             {userrole === "admin" && (

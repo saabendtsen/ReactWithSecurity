@@ -1,10 +1,5 @@
 import jwt_decode from "jwt-decode";
-
-const URL = "http://localhost:8080/CA2_Group_war_exploded";
-
-const CatFactURL = "http://localhost:8080/CA2_Group_war_exploded/api/info/catfact";
-
-
+import { Server_URL } from "./components/Urls";
 function handleHttpErrors(res) {
   if (!res.ok) {
     return Promise.reject({ status: res.status, fullError: res.json() });
@@ -38,30 +33,16 @@ function apiFacade() {
       username: user,
       password: password,
     });
-    return fetch(URL + "/api/login", options)
+    return fetch(Server_URL + "/api/login", options)
       .then(handleHttpErrors)
       .then((res) => {
         setToken(res.token);
       });
   };
 
-  // const getCatFacts = () => {
-  //   const options = makeOptions("GET",true);
-  //   return fetch(CatFactURL,options).then(res => handleHttpErrors(res))
-  //   const options = makeOptions("GET", true);
-  //   const res = fetch(CatFactURL, options)
-  //     .then(handleHttpErrors)
-  //     .then((response) => response.json)
-  //     .then((data) => {
-  //       const catfacts = { fact: data.fact, length: data.length };
-  //       return catfacts;
-  //     });
-
-  // };
-
   const fetchData = async () => {
     const options = makeOptions("GET", true); //True add's the token
-    const res = await fetch(URL + "/api/info/" + decoded.roles, options);
+    const res = await fetch(Server_URL + "/api/info/" + decoded.roles, options);
     return handleHttpErrors(res);
   };
 
@@ -90,7 +71,6 @@ function apiFacade() {
     login,
     logout,
     fetchData,
-    getCatFacts,
   };
 }
 const facade = apiFacade();
