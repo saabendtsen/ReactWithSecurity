@@ -2,6 +2,13 @@ import React, { useState } from "react";
 import facade from "../apiFacade";
 import { Server_URL } from "./Urls";
 
+function handleHttpErrors(res) {
+  if (!res.ok) {
+    return Promise.reject({ status: res.status, fullError: res.json() });
+  }
+  return res.json();
+}
+
 const AdminManager = () => {
   const [newUser, setNewUser] = useState();
 
@@ -11,8 +18,8 @@ const AdminManager = () => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const options = facade.makeOptions("POST", true, newUser);
-    fetch(Server_URL + "/admin/createUser", options).then((res) =>
-      facade.handleHttpErrors(res)
+    fetch(Server_URL + "/api/info/admin/createUser", options).then((res) =>
+      handleHttpErrors(res)
     );
   };
 
@@ -31,7 +38,7 @@ const AdminManager = () => {
             <input
               className="form-control"
               id="username"
-              placeholder="Enter userName"
+              placeholder="Enter username"
             />
           </div>
         </div>
@@ -43,7 +50,7 @@ const AdminManager = () => {
             <input
               type="text"
               className="form-control"
-              id="Password"
+              id="password"
               placeholder="Enter PassWord"
             />
           </div>

@@ -30,13 +30,7 @@ class GetBTCPrice extends React.Component {
         </div>
       );
 
-    return (
-      <div>
-        {items.map((e) => (
-          <ol key={e.time.updated}>{e.time}</ol>
-        ))}
-      </div>
-    );
+    return <div>{JSON.stringify(items)}</div>;
   }
 }
 

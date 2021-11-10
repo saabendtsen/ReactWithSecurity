@@ -26,9 +26,6 @@ export default function Nesting(props) {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route path="/topics">
-              <Topics />
-            </Route>
             <Route path="/catfacts">
               <GetCatFacts />
             </Route>
@@ -41,6 +38,11 @@ export default function Nesting(props) {
             {userrole === "admin" && (
               <Route path="/admin">
                 <AdminManger />
+              </Route>
+            )}
+            {userrole === "admin" && (
+              <Route path="/topics">
+                <Topics />
               </Route>
             )}
           </Switch>
@@ -60,11 +62,6 @@ const Header = (props) => {
         </NavLink>
       </li>
       <li>
-        <NavLink activeClassName="selected" to="/topics">
-          Topics
-        </NavLink>
-      </li>
-      <li>
         <NavLink activeClassName="selected" to="/catfacts">
           Cat Facts
         </NavLink>
@@ -80,6 +77,13 @@ const Header = (props) => {
         </NavLink>
       </li>
 
+      {userrole === "admin" && (
+        <li>
+          <NavLink activeClassName="selected" to="/topics">
+            Topics
+          </NavLink>
+        </li>
+      )}
       {userrole === "admin" && (
         <li>
           <NavLink activeClassName="selected" to="/admin">
