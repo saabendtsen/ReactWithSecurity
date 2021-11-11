@@ -7,4 +7,6 @@ const bitCoinPrice_URL = "https://api.coindesk.com/v1/bpi/currentprice.json";
 
 const yourIp_URL = "https://api.ipify.org/?format=json";
 
-export { catFacts_URL, Server_URL, bitCoinPrice_URL, yourIp_URL };
+const ApexApi_URL = "https://api.mozambiquehe.re/";
+
+export { catFacts_URL, Server_URL, bitCoinPrice_URL, yourIp_URL, ApexApi_URL };

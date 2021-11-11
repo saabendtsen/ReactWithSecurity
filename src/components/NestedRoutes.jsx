@@ -14,6 +14,7 @@ import AdminManger from "./AdminManager";
 import GetCatFacts from "./GetCatFacts";
 import GetIp from "./GetIp";
 import GetBTCPrice from "./GetBTCPrice";
+import ApexApi from "./ApexApi";
 
 export default function Nesting(props) {
   let userrole = props.userrole;
@@ -43,6 +44,11 @@ export default function Nesting(props) {
             {userrole === "admin" && (
               <Route path="/topics">
                 <Topics />
+              </Route>
+            )}
+            {userrole === "admin" && (
+              <Route path="/apex">
+                <ApexApi />
               </Route>
             )}
           </Switch>
@@ -88,6 +94,13 @@ const Header = (props) => {
         <li>
           <NavLink activeClassName="selected" to="/admin">
             Admin
+          </NavLink>
+        </li>
+      )}
+      {userrole === "admin" && (
+        <li>
+          <NavLink activeClassName="selected" to="/apex">
+            APEX API
           </NavLink>
         </li>
       )}
