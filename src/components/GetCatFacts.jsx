@@ -1,28 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { catFacts_URL } from "./Urls";
-class GetCatFacts extends React.Component {
-  // Constructor
-  constructor(props) {
-    super(props);
+const GetCatFacts = () =>  {
+ 
+  const [items,setItems] = useState();
+  const [DataisLoaded, setDataisLoaded] = useState(false)
 
-    this.state = {
-      items: [],
-      DataisLoaded: false,
-    };
-  }
 
-  // ComponentDidMount is used to
-  componentDidMount() {
+  useEffect(() => {
+    setDataisLoaded(false);
+
     fetch(catFacts_URL)
       .then((res) => res.json())
-
       .then((json) => {
-        this.setState({ items: [json], DataisLoaded: true });
-      });
-  }
+        setItems(json);
+        setDataisLoaded(true);
+      }) },[])
 
-  render() {
-    const { DataisLoaded, items } = this.state;
     if (!DataisLoaded)
       return (
         <div>
@@ -41,6 +34,5 @@ class GetCatFacts extends React.Component {
       </div>
     );
   }
-}
 
 export default GetCatFacts;
